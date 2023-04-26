@@ -10,17 +10,11 @@
 
 import * as vscode from 'vscode'
 import { promptRunCommand } from './promptRunCommand'
-import { MINIMUM_TOKEN_LENGTH, SECRET_STORAGE_TOKEN_KEY } from './utils'
-
-/**
- * For development, we can target the extension host.
- * To do this, add "*" to activation events in package.json and set TEST_CALL below. It will only work in development mode. Make sure to remove the * activation event before committing.
- * It will print a URL to the console that you can use to test the extension.
- */
-const TEST_CALL = {
-  cmd: 'workbench.action.files.newUntitledFile',
-  notify: 'true',
-}
+import {
+  MINIMUM_TOKEN_LENGTH,
+  SECRET_STORAGE_TOKEN_KEY,
+  TEST_CALL,
+} from './utils'
 
 /**
  * Validates the required parameters.
