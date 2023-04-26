@@ -9,6 +9,7 @@
  */
 
 import * as vscode from 'vscode'
+import { SECRET_STORAGE_TOKEN_KEY } from './utils'
 
 const SECRET_STORAGE_TOKEN_KEY = 'vscode-execute-command.token'
 
