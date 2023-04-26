@@ -9,9 +9,18 @@
  */
 
 import * as vscode from 'vscode'
+import { logExtensionHostUrl } from './extensionHostUri'
 import { SECRET_STORAGE_TOKEN_KEY } from './utils'
 
-const SECRET_STORAGE_TOKEN_KEY = 'vscode-execute-command.token'
+/**
+ * For development, we can target the extension host.
+ * To do this, add "*" to activation events in package.json and set TEST_CALL below. It will only work in development mode. Make sure to remove the * activation event before committing.
+ * It will print a URL to the console that you can use to test the extension.
+ */
+const TEST_CALL = {
+  cmd: 'workbench.action.files.newUntitledFile',
+  notify: 'true',
+}
 
 /**
  * Validates the required parameters.
@@ -23,7 +32,7 @@ const SECRET_STORAGE_TOKEN_KEY = 'vscode-execute-command.token'
 function validateParameters(cmd: string | null, token: string | null): boolean {
   if (!cmd || !token) {
     vscode.window.showErrorMessage(
-      'Missing required parameters (cmd and/or token).'
+      'Missing required parameters. Received: ' + JSON.stringify({ cmd, token })
     )
     return false
   }
@@ -136,6 +145,10 @@ export function activate(context: vscode.ExtensionContext) {
   )
 
   context.subscriptions.push(uriHandler, setTokenCommand)
+
+  if (context.extensionMode === vscode.ExtensionMode.Development) {
+    logExtensionHostUrl(context)(TEST_CALL)
+  }
 }
 
 /**
