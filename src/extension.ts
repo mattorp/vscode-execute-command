@@ -9,7 +9,7 @@
  */
 
 import * as vscode from 'vscode'
-import { promptRunCommand } from './promptRunCommand'
+import { promptRunTestCommand } from './promptRunTestCommand'
 import { MINIMUM_TOKEN_LENGTH, SECRET_STORAGE_TOKEN_KEY } from './utils'
 
 /**
@@ -149,7 +149,7 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(uriHandler, setTokenCommand)
 
   if (context.extensionMode === vscode.ExtensionMode.Development) {
-    promptRunCommand(context)
+    promptRunTestCommand(context)
   }
 }
 

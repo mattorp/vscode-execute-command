@@ -16,7 +16,9 @@ export const TEST_CALL = {
  *
  * @param {vscode.ExtensionContext} context - The extension context.
  */
-export const promptRunCommand = async (context: vscode.ExtensionContext) => {
+export const promptRunTestCommand = async (
+  context: vscode.ExtensionContext
+) => {
   const token = await context.secrets.get(SECRET_STORAGE_TOKEN_KEY)
   if (!token) {
     vscode.window.showErrorMessage(
