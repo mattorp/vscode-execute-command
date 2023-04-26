@@ -10,7 +10,7 @@
 
 import * as vscode from 'vscode'
 import { logExtensionHostUrl } from './extensionHostUri'
-import { SECRET_STORAGE_TOKEN_KEY } from './utils'
+import { MINIMUM_TOKEN_LENGTH, SECRET_STORAGE_TOKEN_KEY } from './utils'
 
 /**
  * For development, we can target the extension host.
@@ -50,8 +50,13 @@ async function validateToken(
   context: vscode.ExtensionContext,
   token: string
 ): Promise<boolean> {
+  if (token.length < MINIMUM_TOKEN_LENGTH) {
+    vscode.window.showErrorMessage(
+      `Token must be at least ${MINIMUM_TOKEN_LENGTH} characters long.`
+    )
+    return false
+  }
   const storedToken = await context.secrets.get(SECRET_STORAGE_TOKEN_KEY)
-
   if (storedToken !== token) {
     vscode.window.showErrorMessage(
       token ? `Incorrect token provided: ${token}` : `No token provided.`
@@ -135,6 +140,13 @@ export function activate(context: vscode.ExtensionContext) {
         prompt: 'Enter the token to use for executing commands.',
         placeHolder: 'Token',
         value: await context.secrets.get(SECRET_STORAGE_TOKEN_KEY),
+        // Must be a complex token
+        validateInput: (value: string) => {
+          if (value.length < MINIMUM_TOKEN_LENGTH) {
+            return `Token must be at least ${MINIMUM_TOKEN_LENGTH} characters long.`
+          }
+          return null
+        },
       })
 
       if (token) {
