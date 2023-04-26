@@ -2,6 +2,10 @@
 
 `vscode-execute-command` is a Visual Studio Code extension that allows you to execute any Visual Studio Code command by calling a URL. This can help automate tasks or integrate with other tools.
 
+<span style='background-color:red;color:black;font-weight:bold;'>
+WARNING: This is an attack vector since it allows any application that can reach the Visual Studio Code instance to execute commands. Use at your own risk. The token used in the call should be complex enough to prevent brute-force attacks. For the same reason, this extension is not published and should in general be used as a reference implementation.
+</span>
+
 ## Features
 
 - Execute Visual Studio Code commands using a URL.
@@ -11,8 +15,10 @@
 
 ## Installation
 
-1. Install the `vscode-execute-command` extension from the Visual Studio Code Marketplace.
-2. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P), and run the "Set token for vscode-execute-command" command to set a token that will be used for secure communication.
+1. Clone the repository.
+2. use `vsce package` to create a VSIX file.
+3. use `code --install-extension vscode-execute-command-$VERSION.vsix` to install the extension.
+4. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P), and run the "Set token for vscode-execute-command" command to set a token that will be used for secure communication.
 
 ## Usage
 
