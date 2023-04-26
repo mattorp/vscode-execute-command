@@ -43,7 +43,7 @@ or
 vscode://mattorp.vscode-execute-command?cmd=workbench.action.files.newUntitledFile&token=mysecrettoken&notify=error
 ```
 
-As an example, you can open the URL using bash to trigger the command, by using one of the following methods depending on your operating system:
+As an example, you can open the URL using the command line to trigger the command, by using one of the following methods depending on your operating system:
 
 1. **Windows**: Open Command Prompt and run `start "vscode://mattorp.vscode-execute-command?cmd=<command>&token=<token>&notify=<notify>"`.
 2. **macOS**: Open Terminal and run `open "vscode://mattorp.vscode-execute-command?cmd=<command>&token=<token>&notify=<notify>"`.
