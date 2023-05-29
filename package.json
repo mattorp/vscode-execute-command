@@ -28,6 +28,7 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
+    "code-install": "vsce package --out vscode-execute-command.vsix && code --install-extension vscode-execute-command.vsix",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "yarn run compile && yarn run lint",
